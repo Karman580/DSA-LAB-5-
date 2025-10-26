@@ -1,48 +1,29 @@
-#include <iostream>
-using namespace std;
-
-class Node {
-public:
-    int data;
-    Node* next;
-    Node(int val) { data = val; next = nullptr; }
-};
-
-class LinkedList {
-    Node* head;
-public:
-    LinkedList() { head = nullptr; }
-
-    void insert(int val) {
-        Node* newNode = new Node(val);
-        if (head == nullptr) { head = newNode; return; }
-        Node* temp = head;
-        while (temp->next != nullptr) temp = temp->next;
-        temp->next = newNode;
-    }
-
-    void reverse() {
-        Node* prev = nullptr; Node* curr = head; Node* next = nullptr;
-        while (curr != nullptr) {
-            next = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = next;
-        }
-        head = prev;
-    }
-
-    void display() {
-        Node* temp = head;
-        while (temp != nullptr) { cout << temp->data << " -> "; temp = temp->next; }
-        cout << "NULL" << endl;
-    }
-};
 
 int main() {
-    LinkedList list;
-    list.insert(1); list.insert(2); list.insert(3); list.insert(4);
-    list.display();
-    list.reverse();
-    list.display();
+    int arr[100], n, i;
+
+    cout << "Enter size of array: ";
+    cin >> n;
+
+    cout << "Enter " << n << " elements:\n";
+    for(i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    int start = 0;
+    int end = n - 1;
+    while(start < end) {
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        start++;
+        end--;
+    }
+
+    cout << "Reversed array:\n";
+    for(i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+
+    return 0;
 }
